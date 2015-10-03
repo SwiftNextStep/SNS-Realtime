@@ -11,16 +11,14 @@ import UIKit
 class ViewController: UIViewController {
 
     
+    @IBOutlet weak var textLabel: UILabel!
     let firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com/")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        firebase.setValue("App started")
-        
+                
         firebase.observeEventType(FEventType.Value) { (snapshot:FDataSnapshot!) -> Void in
-            print(snapshot.value)
-            self.firebase.setValue("Computer says no!")
+            self.textLabel.text = snapshot.value as? String
         }
     }
 

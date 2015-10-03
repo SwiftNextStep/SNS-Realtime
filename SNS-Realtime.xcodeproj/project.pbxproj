@@ -12,9 +12,12 @@
 		208A2B7A1BBF62BA009660CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 208A2B781BBF62BA009660CA /* Main.storyboard */; };
 		208A2B7C1BBF62BA009660CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 208A2B7B1BBF62BA009660CA /* Assets.xcassets */; };
 		208A2B7F1BBF62BA009660CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 208A2B7D1BBF62BA009660CA /* LaunchScreen.storyboard */; };
+		6AF633F602B0A29C724A09D0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D039614297CFB918D79446D /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D039614297CFB918D79446D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		200A67B21BBF633800D31C1F /* SNS-Realtime-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SNS-Realtime-Bridging-Header.h"; sourceTree = "<group>"; };
 		208A2B711BBF62B9009660CA /* SNS-Realtime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SNS-Realtime.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		208A2B741BBF62BA009660CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		208A2B761BBF62BA009660CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,8 @@
 		208A2B7B1BBF62BA009660CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		208A2B7E1BBF62BA009660CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		208A2B801BBF62BA009660CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADAC844920CB2DADD9D38409 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EE650ED4CABA4AF32284205F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +34,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AF633F602B0A29C724A09D0 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1ED1AE795A382D2DD12FEE56 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ADAC844920CB2DADD9D38409 /* Pods.debug.xcconfig */,
+				EE650ED4CABA4AF32284205F /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		208A2B681BBF62B9009660CA = {
 			isa = PBXGroup;
 			children = (
 				208A2B731BBF62BA009660CA /* SNS-Realtime */,
 				208A2B721BBF62B9009660CA /* Products */,
+				1ED1AE795A382D2DD12FEE56 /* Pods */,
+				4E5C17FC8943571430E60786 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +77,17 @@
 				208A2B7B1BBF62BA009660CA /* Assets.xcassets */,
 				208A2B7D1BBF62BA009660CA /* LaunchScreen.storyboard */,
 				208A2B801BBF62BA009660CA /* Info.plist */,
+				200A67B21BBF633800D31C1F /* SNS-Realtime-Bridging-Header.h */,
 			);
 			path = "SNS-Realtime";
+			sourceTree = "<group>";
+		};
+		4E5C17FC8943571430E60786 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0D039614297CFB918D79446D /* libPods.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +97,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 208A2B831BBF62BA009660CA /* Build configuration list for PBXNativeTarget "SNS-Realtime" */;
 			buildPhases = (
+				9A59E37B1FC51096313BD975 /* Check Pods Manifest.lock */,
 				208A2B6D1BBF62B9009660CA /* Sources */,
 				208A2B6E1BBF62B9009660CA /* Frameworks */,
 				208A2B6F1BBF62B9009660CA /* Resources */,
+				053A490D2AA420E1FCC9B88A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -90,6 +118,7 @@
 		208A2B691BBF62B9009660CA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Icaro Barreira Lavrador";
 				TargetAttributes = {
@@ -128,6 +157,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		053A490D2AA420E1FCC9B88A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A59E37B1FC51096313BD975 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		208A2B6D1BBF62B9009660CA /* Sources */ = {
@@ -244,23 +306,30 @@
 		};
 		208A2B841BBF62BA009660CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADAC844920CB2DADD9D38409 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "SNS-Realtime/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftnextstep.SNS-Realtime";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SNS-Realtime/SNS-Realtime-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		208A2B851BBF62BA009660CA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE650ED4CABA4AF32284205F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "SNS-Realtime/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftnextstep.SNS-Realtime";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SNS-Realtime/SNS-Realtime-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -283,6 +352,7 @@
 				208A2B851BBF62BA009660CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

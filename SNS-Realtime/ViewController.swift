@@ -10,9 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    let firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com/")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        firebase.setValue("App started")
+        
+        firebase.observeEventType(FEventType.Value) { (snapshot:FDataSnapshot!) -> Void in
+            print(snapshot.value)
+            self.firebase.setValue("Computer says no!")
+        }
     }
 
     override func didReceiveMemoryWarning() {

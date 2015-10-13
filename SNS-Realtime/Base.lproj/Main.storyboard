@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="dNE-0o-pHd">
             <objects>
-                <viewController id="iP4-4Q-mCb" sceneMemberID="viewController">
+                <viewController id="iP4-4Q-mCb" customClass="LoginViewController" customModule="SNS_Realtime" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NWL-KQ-pqJ"/>
                         <viewControllerLayoutGuide type="bottom" id="FcP-er-3tb"/>
@@ -21,14 +21,14 @@
                                 <rect key="frame" x="20" y="32" width="560" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to Realtime app" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbZ-1f-OCd">
                                 <rect key="frame" x="20" y="63" width="560" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6TL-we-8hF">
@@ -41,17 +41,23 @@
                                 <rect key="frame" x="20" y="141" width="560" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQ2-Jk-eGa">
                                 <rect key="frame" x="20" y="183" width="38" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="LoginButton:" destination="iP4-4Q-mCb" eventType="touchUpInside" id="QF7-ag-ZhE"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nce-vi-VmW">
                                 <rect key="frame" x="528" y="183" width="52" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Sign up"/>
+                                <connections>
+                                    <action selector="Signup:" destination="iP4-4Q-mCb" eventType="touchUpInside" id="ccF-nm-lwU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
@@ -75,10 +81,66 @@
                             <constraint firstItem="6TL-we-8hF" firstAttribute="top" secondItem="zbZ-1f-OCd" secondAttribute="bottom" constant="15" id="yG0-no-oWI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextfield" destination="6TL-we-8hF" id="qiK-rS-4Qa"/>
+                        <outlet property="passwordTextfield" destination="nWF-pT-vwe" id="1I2-43-pKq"/>
+                        <segue destination="jsf-wf-V6k" kind="show" identifier="mainSegue" id="QWP-Ok-Hhd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPh-mi-PmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="332" y="167"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="9Ct-rr-SNR">
+            <objects>
+                <tableViewController id="ie3-Rc-pyb" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tBl-Ym-bsG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Icd-L0-Vep">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Icd-L0-Vep" id="hvi-xi-tD8">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ie3-Rc-pyb" id="6BS-5B-bgW"/>
+                            <outlet property="delegate" destination="ie3-Rc-pyb" id="bpY-mN-vxB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="7ql-0x-kmc"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PzE-a3-yNC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1837" y="167"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Dlo-fg-kfr">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jsf-wf-V6k" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iEm-xF-sGK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ie3-Rc-pyb" kind="relationship" relationship="rootViewController" id="VuO-aj-ofy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HG2-DG-GLk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1119" y="167"/>
         </scene>
     </scenes>
 </document>

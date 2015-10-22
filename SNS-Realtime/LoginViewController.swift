@@ -11,7 +11,7 @@ import UIKit
 class LoginViewController: UIViewController {
 
     var firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com/")
-    
+    var username = String()
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     
@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
                     self.displayMessage(error)
                 } else{
                     print("New user created")
-                    self.logUser()
+                    self.requestUsername()
                 }
             }
         }
@@ -77,19 +77,21 @@ class LoginViewController: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func requestUsername(){
+        var usernameTextfield: UITextField?
+        let titleMessage = "Enter a Username"
+        let bodyMessage = "Please enter a username for your new account:"
+        let usernameEntry = UIAlertController(title: titleMessage, message: bodyMessage, preferredStyle: .Alert)
+        let actionOk = UIAlertAction(title: "Ok", style: .Default) { (UIAlertAction) -> Void in
+            if let user = usernameTextfield?.text{
+                print(user)
+                self.logUser()
+            }
+        }
+        usernameEntry.addAction(actionOk)
+        usernameEntry.addTextFieldWithConfigurationHandler { (username:UITextField) -> Void in
+            usernameTextfield = username
+        }
+        self.presentViewController(usernameEntry, animated: true, completion: nil)
+    }
 }

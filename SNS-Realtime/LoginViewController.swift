@@ -12,8 +12,10 @@ class LoginViewController: UIViewController {
 
     var firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com/")
     var username = String()
+    var newUser = false
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
+    
     
     @IBAction func LoginButton(sender: UIButton) {
         logUser()
@@ -54,6 +56,12 @@ class LoginViewController: UIViewController {
                     self.displayMessage(error)
                 } else{
                     print("user logged \(authData.description)")
+                    let uid = authData.uid
+                    if self.newUser{
+                        self.firebase.childByAppendingPath("users").childByAppendingPath(uid).setValue(["isOnline":true, "name":self.username])
+                    } else{
+                        self.firebase.childByAppendingPath("users").childByAppendingPath(uid).updateChildValues(["isOnline":true])
+                    }
                     self.performSegueWithIdentifier("mainSegue", sender: self)
                 }
             }
@@ -85,6 +93,8 @@ class LoginViewController: UIViewController {
         let actionOk = UIAlertAction(title: "Ok", style: .Default) { (UIAlertAction) -> Void in
             if let user = usernameTextfield?.text{
                 print(user)
+                self.username = user
+                self.newUser = true
                 self.logUser()
             }
         }

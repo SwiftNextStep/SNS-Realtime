@@ -35,10 +35,16 @@ class LoginViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        emailTextfield.text = ""
+        passwordTextfield.text = ""
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if firebase.authData != nil{
+            self.performSegueWithIdentifier("mainSegue", sender: self)
+        }
     }
     
 

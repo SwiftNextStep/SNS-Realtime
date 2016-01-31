@@ -11,7 +11,8 @@ import UIKit
 class MessagesTableViewController: UITableViewController {
     
     var firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com/")
-    
+    let uid = String?()
+
     @IBAction func logout(sender: AnyObject) {
         firebase.unauth()
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -113,7 +114,7 @@ class MessagesTableViewController: UITableViewController {
     */
     
     func receiveMessageToSend(message:String){
-        print(message)
+        self.firebase.childByAppendingPath("postID").childByAutoId().setValue(["message":message, "sender":firebase.authData.uid])
     }
 
 }

@@ -11,7 +11,7 @@ import UIKit
 class MessageViewController: UIViewController {
     
     var onMessageAvailable : ((data: String) -> ())?
-    
+
     @IBOutlet weak var message: UITextField!
     
     @IBAction func sendMessage(sender: AnyObject) {
@@ -25,7 +25,6 @@ class MessageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 

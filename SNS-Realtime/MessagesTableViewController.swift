@@ -45,6 +45,17 @@ class MessagesTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let messageController = segue.destinationViewController as? MessageViewController {
+            messageController.onMessageAvailable = {[weak self]
+                (data) in
+                if let weakSelf = self {
+                    weakSelf.receiveMessageToSend(data)
+                }
+            }
+        }
+    }
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -100,5 +111,9 @@ class MessagesTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func receiveMessageToSend(message:String){
+        print(message)
+    }
 
 }

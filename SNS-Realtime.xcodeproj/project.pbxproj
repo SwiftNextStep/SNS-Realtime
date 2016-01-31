@@ -13,6 +13,7 @@
 		208A2B7A1BBF62BA009660CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 208A2B781BBF62BA009660CA /* Main.storyboard */; };
 		208A2B7C1BBF62BA009660CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 208A2B7B1BBF62BA009660CA /* Assets.xcassets */; };
 		208A2B7F1BBF62BA009660CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 208A2B7D1BBF62BA009660CA /* LaunchScreen.storyboard */; };
+		20A1F9BD1C5EBDB700493619 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A1F9BC1C5EBDB700493619 /* MessageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		208A2B7B1BBF62BA009660CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		208A2B7E1BBF62BA009660CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		208A2B801BBF62BA009660CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20A1F9BC1C5EBDB700493619 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		35DF22285A861AE0AE65B1B6 /* Pods-SNS-Realtime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SNS-Realtime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SNS-Realtime/Pods-SNS-Realtime.debug.xcconfig"; sourceTree = "<group>"; };
 		ADAC844920CB2DADD9D38409 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B1C27FA5D934B208D7DD121A /* Pods-SNS-Realtime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SNS-Realtime.release.xcconfig"; path = "Pods/Target Support Files/Pods-SNS-Realtime/Pods-SNS-Realtime.release.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				208A2B741BBF62BA009660CA /* AppDelegate.swift */,
 				208A2B781BBF62BA009660CA /* Main.storyboard */,
 				208409791BEF645000C6125E /* MessagesTableViewController.swift */,
+				20A1F9BC1C5EBDB700493619 /* MessageViewController.swift */,
 				204D93241BCA6A83003A3FD6 /* LoginViewController.swift */,
 				208A2B7B1BBF62BA009660CA /* Assets.xcassets */,
 				208A2B7D1BBF62BA009660CA /* LaunchScreen.storyboard */,
@@ -206,6 +209,7 @@
 			files = (
 				204D93251BCA6A83003A3FD6 /* LoginViewController.swift in Sources */,
 				2084097A1BEF645000C6125E /* MessagesTableViewController.swift in Sources */,
+				20A1F9BD1C5EBDB700493619 /* MessageViewController.swift in Sources */,
 				208A2B751BBF62BA009660CA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

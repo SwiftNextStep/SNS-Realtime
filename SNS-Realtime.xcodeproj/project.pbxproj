@@ -13,7 +13,6 @@
 		208A2B7A1BBF62BA009660CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 208A2B781BBF62BA009660CA /* Main.storyboard */; };
 		208A2B7C1BBF62BA009660CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 208A2B7B1BBF62BA009660CA /* Assets.xcassets */; };
 		208A2B7F1BBF62BA009660CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 208A2B7D1BBF62BA009660CA /* LaunchScreen.storyboard */; };
-		6AF633F602B0A29C724A09D0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D039614297CFB918D79446D /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +26,11 @@
 		208A2B7B1BBF62BA009660CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		208A2B7E1BBF62BA009660CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		208A2B801BBF62BA009660CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		35DF22285A861AE0AE65B1B6 /* Pods-SNS-Realtime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SNS-Realtime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SNS-Realtime/Pods-SNS-Realtime.debug.xcconfig"; sourceTree = "<group>"; };
 		ADAC844920CB2DADD9D38409 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		B1C27FA5D934B208D7DD121A /* Pods-SNS-Realtime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SNS-Realtime.release.xcconfig"; path = "Pods/Target Support Files/Pods-SNS-Realtime/Pods-SNS-Realtime.release.xcconfig"; sourceTree = "<group>"; };
 		EE650ED4CABA4AF32284205F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		FDB581F1D62A96531C5CEB65 /* libPods-SNS-Realtime.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SNS-Realtime.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,7 +38,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AF633F602B0A29C724A09D0 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +49,8 @@
 			children = (
 				ADAC844920CB2DADD9D38409 /* Pods.debug.xcconfig */,
 				EE650ED4CABA4AF32284205F /* Pods.release.xcconfig */,
+				35DF22285A861AE0AE65B1B6 /* Pods-SNS-Realtime.debug.xcconfig */,
+				B1C27FA5D934B208D7DD121A /* Pods-SNS-Realtime.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -89,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				0D039614297CFB918D79446D /* libPods.a */,
+				FDB581F1D62A96531C5CEB65 /* libPods-SNS-Realtime.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,6 +131,7 @@
 				TargetAttributes = {
 					208A2B701BBF62B9009660CA = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 8894S66WD8;
 					};
 				};
 			};
@@ -174,7 +179,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SNS-Realtime/Pods-SNS-Realtime-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9A59E37B1FC51096313BD975 /* Check Pods Manifest.lock */ = {
@@ -310,10 +315,11 @@
 		};
 		208A2B841BBF62BA009660CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADAC844920CB2DADD9D38409 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 35DF22285A861AE0AE65B1B6 /* Pods-SNS-Realtime.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "SNS-Realtime/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftnextstep.SNS-Realtime";
@@ -325,10 +331,11 @@
 		};
 		208A2B851BBF62BA009660CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE650ED4CABA4AF32284205F /* Pods.release.xcconfig */;
+			baseConfigurationReference = B1C27FA5D934B208D7DD121A /* Pods-SNS-Realtime.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "SNS-Realtime/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swiftnextstep.SNS-Realtime";

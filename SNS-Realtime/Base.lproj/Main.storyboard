@@ -145,18 +145,18 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="b67-QE-Cat">
-                                        <rect key="frame" x="0.0" y="125" width="249" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="b67-QE-Cat">
+                                        <rect key="frame" x="0.0" y="125" width="127" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiE-iD-MHD">
-                                                <rect key="frame" x="0.0" y="0.0" width="109" height="30"/>
-                                                <state key="normal" title="  Send Message"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiE-iD-MHD">
+                                                <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
+                                                <state key="normal" title="  Send"/>
                                                 <connections>
                                                     <action selector="sendMessage:" destination="PoN-tM-b4m" eventType="touchUpInside" id="LF3-Lj-WeJ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCA-P8-jjQ">
-                                                <rect key="frame" x="140" y="0.0" width="109" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCA-P8-jjQ">
+                                                <rect key="frame" x="79" y="0.0" width="48" height="30"/>
                                                 <state key="normal" title="Cancel"/>
                                                 <connections>
                                                     <action selector="cancelMessage:" destination="PoN-tM-b4m" eventType="touchUpInside" id="jdw-Nu-l1H"/>

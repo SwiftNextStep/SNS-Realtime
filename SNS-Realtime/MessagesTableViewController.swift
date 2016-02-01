@@ -8,9 +8,22 @@
 
 import UIKit
 
+struct User {
+    let uid: String?
+    let name: String?
+}
+
+struct Messages {
+    let message: String?
+    let uid: String?
+}
+
 class MessagesTableViewController: UITableViewController {
     
     var firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com/")
+    var chieldAddedHandler = FirebaseHandle()
+    var listOfMessages = Array<Messages>()
+    
     let uid = String?()
 
     @IBAction func logout(sender: AnyObject) {
@@ -22,7 +35,20 @@ class MessagesTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        chieldAddedHandler = firebase.observeEventType(.ChildAdded, withBlock: { (snapshot:FDataSnapshot!) -> Void in
+            if let newMessages = snapshot.value as? NSDictionary{
+                print(newMessages)
+                for newMessage in newMessages{
+                    let message = newMessage.value
+                    print(message)
+                    let appMessage = Messages(message: message["message"] as? String, uid: message["sender"] as? String)
+                    self.listOfMessages.append(appMessage)
+                }
+                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                    self.tableView.reloadData()
+                }
+            }
+        })
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -39,12 +65,12 @@ class MessagesTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return listOfMessages.count - 1
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -58,15 +84,14 @@ class MessagesTableViewController: UITableViewController {
         }
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let message = listOfMessages[indexPath.row]
+        cell.textLabel?.text = message.message
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

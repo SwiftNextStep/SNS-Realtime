@@ -13,16 +13,11 @@ struct User {
     let name: String?
 }
 
-struct Messages {
-    let message: String?
-    let uid: String?
-}
-
 class MessagesTableViewController: UITableViewController {
     
     var firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com/")
     var chieldAddedHandler = FirebaseHandle()
-    var listOfMessages = Array<Messages>()
+    var listOfMessages = NSMutableDictionary()
     
     let uid = String?()
 
@@ -35,27 +30,31 @@ class MessagesTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        chieldAddedHandler = firebase.observeEventType(.ChildAdded, withBlock: { (snapshot:FDataSnapshot!) -> Void in
-            if let newMessages = snapshot.value as? NSDictionary{
-                print(newMessages)
-                for newMessage in newMessages{
-                    let message = newMessage.value
-                    print(message)
-                    let appMessage = Messages(message: message["message"] as? String, uid: message["sender"] as? String)
-                    self.listOfMessages.append(appMessage)
-                }
-                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                    self.tableView.reloadData()
-                }
-            }
+        chieldAddedHandler = firebase.childByAppendingPath("posts").observeEventType(.Value, withBlock: { (snapshot:FDataSnapshot!) -> Void in
+            self.firebaseUpdate(snapshot)
         })
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        chieldAddedHandler = firebase.observeEventType(.ChildChanged, withBlock: { (snapshot:FDataSnapshot!) -> Void in
+            self.firebaseUpdate(snapshot)
+        })
     }
 
+    func firebaseUpdate(snapshot: FDataSnapshot){
+        if let newMessages = snapshot.value as? NSDictionary{
+            print(newMessages)
+            for newMessage in newMessages{
+                let key = newMessage.key as! String
+                let messageExist = (self.listOfMessages[key] != nil)
+                if !messageExist{
+                    self.listOfMessages.setValue(newMessage.value, forKey: key)
+                }
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue()){[unowned self] in
+            self.tableView.reloadData()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -64,13 +63,11 @@ class MessagesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return listOfMessages.count - 1
+        return listOfMessages.count
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -85,12 +82,19 @@ class MessagesTableViewController: UITableViewController {
     }
 
     
+    
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        let message = listOfMessages[indexPath.row]
-        cell.textLabel?.text = message.message
+        let arrayOfKeys = listOfMessages.allKeys
+        let key = arrayOfKeys[indexPath.row]
+        let value = listOfMessages[key as! String]
+        cell.textLabel?.text = (value as! NSDictionary)["message"] as? String
         return cell
     }
+    
+    
     
 
     /*
@@ -139,7 +143,7 @@ class MessagesTableViewController: UITableViewController {
     */
     
     func receiveMessageToSend(message:String){
-        self.firebase.childByAppendingPath("postID").childByAutoId().setValue(["message":message, "sender":firebase.authData.uid])
+        self.firebase.childByAppendingPath("posts").childByAutoId().setValue(["message":message, "sender":firebase.authData.uid])
     }
 
 }

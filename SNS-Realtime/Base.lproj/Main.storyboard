@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iP4-4Q-mCb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iP4-4Q-mCb">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -78,11 +78,30 @@
                         <outlet property="emailTextfield" destination="6TL-we-8hF" id="qiK-rS-4Qa"/>
                         <outlet property="passwordTextfield" destination="nWF-pT-vwe" id="1I2-43-pKq"/>
                         <segue destination="jsf-wf-V6k" kind="show" identifier="mainSegue" id="QWP-Ok-Hhd"/>
+                        <segue destination="K8T-fB-aFH" kind="show" identifier="segueJSQ" id="bQa-ZZ-XJg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPh-mi-PmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="332" y="167"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="wQ7-Bv-d4W">
+            <objects>
+                <viewController id="K8T-fB-aFH" customClass="JSQViewController" customModule="SNS_Realtime" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y8q-PA-Q9N"/>
+                        <viewControllerLayoutGuide type="bottom" id="esa-VI-tc4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fLs-mC-uWS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h13-iU-EaH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="332" y="915"/>
         </scene>
         <!--Messages Table View Controller-->
         <scene sceneID="9Ct-rr-SNR">
@@ -145,17 +164,17 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="b67-QE-Cat">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="b67-QE-Cat">
                                         <rect key="frame" x="0.0" y="125" width="127" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiE-iD-MHD">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiE-iD-MHD">
                                                 <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
                                                 <state key="normal" title="  Send"/>
                                                 <connections>
                                                     <action selector="sendMessage:" destination="PoN-tM-b4m" eventType="touchUpInside" id="LF3-Lj-WeJ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCA-P8-jjQ">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCA-P8-jjQ">
                                                 <rect key="frame" x="79" y="0.0" width="48" height="30"/>
                                                 <state key="normal" title="Cancel"/>
                                                 <connections>

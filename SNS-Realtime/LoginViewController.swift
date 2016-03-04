@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    var firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com/")
+    var firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com")
     var username = String()
     var newUser = false
     @IBOutlet weak var emailTextfield: UITextField!
@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if firebase.authData != nil{
-            self.performSegueWithIdentifier("segueJSQ", sender: self)
+            self.retriveUserName()
         }
     }
     
@@ -65,12 +65,29 @@ class LoginViewController: UIViewController {
                     let uid = authData.uid
                     if self.newUser{
                         self.firebase.childByAppendingPath("users").childByAppendingPath(uid).setValue(["isOnline":true, "name":self.username])
+                        self.performSegueWithIdentifier("segueJSQ", sender: self)
                     } else{
                         self.firebase.childByAppendingPath("users").childByAppendingPath(uid).updateChildValues(["isOnline":true])
+                        self.retriveUserName()
                     }
-                    self.performSegueWithIdentifier("segueJSQ", sender: self)
                 }
             }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueJSQ"{
+            if let viewController = segue.destinationViewController as? JSQViewController{
+                viewController.senderId = self.firebase.authData.uid
+                viewController.senderDisplayName = self.username
+            }
+        }
+    }
+    
+    func retriveUserName(){
+        self.firebase.childByAppendingPath("users").childByAppendingPath(firebase.authData.uid).observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) -> Void in
+            self.username = (snapshot.value as! NSDictionary)["name"] as! String
+            self.performSegueWithIdentifier("segueJSQ", sender: self)
         }
     }
     

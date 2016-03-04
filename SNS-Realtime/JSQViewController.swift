@@ -38,7 +38,10 @@ class JSQViewController: JSQMessagesViewController {
                 self.keys.append(value.key as! String)
                 if let message = value.value as? NSDictionary{
                     let date = message["date"] as! NSTimeInterval
-                    let jsqMessage = JSQMessage(senderId: message["senderId"] as! String, senderDisplayName: message["senderDisplayName"] as! String, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
+                    let receiveSenderID = message["senderId"] as! String
+                    let receiveDisplayName = message["senderDisplayName"] as! String
+                    self.createAvatar(receiveSenderID, senderDisplayName: receiveDisplayName, color: UIColor.jsq_messageBubbleGreenColor())
+                    let jsqMessage = JSQMessage(senderId: receiveSenderID, senderDisplayName: receiveDisplayName, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
                     self.messages.append(jsqMessage)
                 }
             }
@@ -49,10 +52,12 @@ class JSQViewController: JSQMessagesViewController {
             self.keys.append(snapshot.key)
             if let message = snapshot.value as? NSDictionary{
                 let date = message["date"] as! NSTimeInterval
-                let senderId = message["senderId"] as! String
-                let jsqMessage = JSQMessage(senderId: senderId, senderDisplayName: message["senderDisplayName"] as! String, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
+                let receiveSenderID = message["senderId"] as! String
+                let receiveDisplayName = message["senderDisplayName"] as! String
+                self.createAvatar(receiveSenderID, senderDisplayName: receiveDisplayName, color: UIColor.jsq_messageBubbleGreenColor())
+                let jsqMessage = JSQMessage(senderId: receiveSenderID, senderDisplayName: receiveDisplayName, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
                 self.messages.append(jsqMessage)
-                if senderId != self.senderId{
+                if receiveSenderID != self.senderId{
                     JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
                 }
             }

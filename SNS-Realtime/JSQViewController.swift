@@ -18,11 +18,28 @@ class JSQViewController: JSQMessagesViewController {
     var messages = [JSQMessage]()
     var keys = [String]()
     
-    let firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com/JSQNode")
+    let firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com")
+    var userConnection = Firebase()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("id: \(senderId) userName: \(senderDisplayName)")
+        setupCollectUsers()
+        setup()
+        
+    }
+    
+    func setupCollectUsers(){
+        firebase.childByAppendingPath("users").observeSingleEventOfType(FEventType.Value) { (snapshot:FDataSnapshot!) -> Void in
+            print("Single -> \(snapshot)")
+        }
+        firebase.childByAppendingPath("users").observeSingleEventOfType(FEventType.ChildChanged) { (snapshot:FDataSnapshot!) -> Void in
+            print("Observer -> \(snapshot)")
+        }
+    }
+    
+    func setup(){
+        userConnection = Firebase(url: "https://sns-realtimeapp.firebaseio.com/users/\(senderId)/isOnline")
+        userConnection.onDisconnectSetValue("false")
         self.inputToolbar?.contentView?.leftBarButtonItem?.hidden = true
         self.inputToolbar?.contentView?.leftBarButtonItemWidth = 0
         
@@ -32,7 +49,7 @@ class JSQViewController: JSQMessagesViewController {
         
         createAvatar(senderId, senderDisplayName: senderDisplayName, color: UIColor.lightGrayColor())
         
-        firebase.queryLimitedToLast(50).observeSingleEventOfType(FEventType.Value) { (snapshot:FDataSnapshot!) -> Void in
+        firebase.childByAppendingPath("JSQNode").queryOrderedByChild("message").queryEqualToValue("Test").queryLimitedToLast(50).observeSingleEventOfType(FEventType.Value) { (snapshot:FDataSnapshot!) -> Void in
             let values = snapshot.value
             for value in values as! NSDictionary{
                 self.keys.append(value.key as! String)
@@ -48,7 +65,7 @@ class JSQViewController: JSQMessagesViewController {
             self.finishReceivingMessageAnimated(true)
         }
         
-        firebase.queryLimitedToLast(1).observeEventType(.ChildAdded) { (snapshot:FDataSnapshot!) -> Void in
+        firebase.childByAppendingPath("JSQNode").queryLimitedToLast(1).observeEventType(.ChildAdded) { (snapshot:FDataSnapshot!) -> Void in
             self.keys.append(snapshot.key)
             if let message = snapshot.value as? NSDictionary{
                 let date = message["date"] as! NSTimeInterval
@@ -64,7 +81,7 @@ class JSQViewController: JSQMessagesViewController {
             self.finishReceivingMessageAnimated(true)
         }
     }
-
+    
     func createAvatar(senderId: String, senderDisplayName: String, color: UIColor){
         if avatars[senderId] == nil{
             let initials = senderDisplayName.substringToIndex(senderDisplayName.startIndex.advancedBy(min(2, senderDisplayName.characters.count)))
@@ -79,7 +96,7 @@ class JSQViewController: JSQMessagesViewController {
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         //let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text)
-        firebase.childByAutoId().setValue(["message":text, "senderId":senderId, "senderDisplayName":senderDisplayName, "date":date.timeIntervalSince1970, "messageType":"txt"])
+        firebase.childByAppendingPath("JSQNode").childByAutoId().setValue(["message":text, "senderId":senderId, "senderDisplayName":senderDisplayName, "date":date.timeIntervalSince1970, "messageType":"txt"])
         //messages.append(message)
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         finishSendingMessage()

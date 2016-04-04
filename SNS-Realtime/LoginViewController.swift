@@ -77,8 +77,10 @@ class LoginViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueJSQ"{
+            let uid = self.firebase.authData.uid
             if let viewController = segue.destinationViewController as? JSQViewController{
-                viewController.senderId = self.firebase.authData.uid
+                firebase.childByAppendingPath("users").childByAppendingPath(uid).updateChildValues(["isOnline":true])
+                viewController.senderId = uid
                 viewController.senderDisplayName = self.username
             }
         }

@@ -65,11 +65,12 @@ class JSQViewController: JSQMessagesViewController {
                     print(message["message"] as! String)
                 }
             }
+            self.messages.sortInPlace({ ($0.date.compare($1.date) == NSComparisonResult.OrderedAscending)})
             self.finishReceivingMessageAnimated(true)
             }
         }
         
-        firebase.childByAppendingPath("JSQNode").queryLimitedToLast(1).observeEventType(.ChildAdded) { (snapshot:FDataSnapshot!) -> Void in
+        firebase.childByAppendingPath("JSQNode").queryLimitedToLast(10).observeEventType(.ChildAdded) { (snapshot:FDataSnapshot!) -> Void in
             self.keys.append(snapshot.key)
             if let message = snapshot.value as? NSDictionary{
                 let date = message["date"] as! NSTimeInterval

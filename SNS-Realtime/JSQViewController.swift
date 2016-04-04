@@ -49,10 +49,12 @@ class JSQViewController: JSQMessagesViewController {
         
         createAvatar(senderId, senderDisplayName: senderDisplayName, color: UIColor.lightGrayColor())
         
-        firebase.childByAppendingPath("JSQNode").queryOrderedByChild("message").queryEqualToValue("Test").queryLimitedToLast(50).observeSingleEventOfType(FEventType.Value) { (snapshot:FDataSnapshot!) -> Void in
-            let values = snapshot.value
-            for value in values as! NSDictionary{
+        firebase.childByAppendingPath("JSQNode").queryLimitedToLast(50).queryOrderedByChild("date").observeSingleEventOfType(FEventType.Value) { (snapshot:FDataSnapshot!) -> Void in
+            print(snapshot)
+            if let values = snapshot.value as? NSDictionary{
+            for value in values{
                 self.keys.append(value.key as! String)
+                
                 if let message = value.value as? NSDictionary{
                     let date = message["date"] as! NSTimeInterval
                     let receiveSenderID = message["senderId"] as! String
@@ -60,9 +62,11 @@ class JSQViewController: JSQMessagesViewController {
                     self.createAvatar(receiveSenderID, senderDisplayName: receiveDisplayName, color: UIColor.jsq_messageBubbleGreenColor())
                     let jsqMessage = JSQMessage(senderId: receiveSenderID, senderDisplayName: receiveDisplayName, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
                     self.messages.append(jsqMessage)
+                    print(message["message"] as! String)
                 }
             }
             self.finishReceivingMessageAnimated(true)
+            }
         }
         
         firebase.childByAppendingPath("JSQNode").queryLimitedToLast(1).observeEventType(.ChildAdded) { (snapshot:FDataSnapshot!) -> Void in

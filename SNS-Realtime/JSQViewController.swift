@@ -52,38 +52,42 @@ class JSQViewController: JSQMessagesViewController {
         firebase.childByAppendingPath("JSQNode").queryLimitedToLast(50).queryOrderedByChild("date").observeSingleEventOfType(FEventType.Value) { (snapshot:FDataSnapshot!) -> Void in
             print(snapshot)
             if let values = snapshot.value as? NSDictionary{
-            for value in values{
-                self.keys.append(value.key as! String)
-                
-                if let message = value.value as? NSDictionary{
+                for value in values{
+                    if !self.keys.contains(snapshot.key){
+                        self.keys.append(value.key as! String)
+                        
+                        if let message = value.value as? NSDictionary{
+                            let date = message["date"] as! NSTimeInterval
+                            let receiveSenderID = message["senderId"] as! String
+                            let receiveDisplayName = message["senderDisplayName"] as! String
+                            self.createAvatar(receiveSenderID, senderDisplayName: receiveDisplayName, color: UIColor.jsq_messageBubbleGreenColor())
+                            let jsqMessage = JSQMessage(senderId: receiveSenderID, senderDisplayName: receiveDisplayName, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
+                            self.messages.append(jsqMessage)
+                            print(message["message"] as! String)
+                        }
+                    }
+                }
+                self.messages.sortInPlace({ ($0.date.compare($1.date) == NSComparisonResult.OrderedAscending)})
+                self.finishReceivingMessageAnimated(true)
+            }
+        }
+        
+        firebase.childByAppendingPath("JSQNode").queryLimitedToLast(1).observeEventType(.ChildAdded) { (snapshot:FDataSnapshot!) -> Void in
+            if !self.keys.contains(snapshot.key){
+                self.keys.append(snapshot.key)
+                if let message = snapshot.value as? NSDictionary{
                     let date = message["date"] as! NSTimeInterval
                     let receiveSenderID = message["senderId"] as! String
                     let receiveDisplayName = message["senderDisplayName"] as! String
                     self.createAvatar(receiveSenderID, senderDisplayName: receiveDisplayName, color: UIColor.jsq_messageBubbleGreenColor())
                     let jsqMessage = JSQMessage(senderId: receiveSenderID, senderDisplayName: receiveDisplayName, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
                     self.messages.append(jsqMessage)
-                    print(message["message"] as! String)
+                    if receiveSenderID != self.senderId{
+                        JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+                    }
                 }
+                self.finishReceivingMessageAnimated(true)
             }
-            self.messages.sortInPlace({ ($0.date.compare($1.date) == NSComparisonResult.OrderedAscending)})
-            self.finishReceivingMessageAnimated(true)
-            }
-        }
-        
-        firebase.childByAppendingPath("JSQNode").queryLimitedToLast(1).observeEventType(.ChildAdded) { (snapshot:FDataSnapshot!) -> Void in
-            self.keys.append(snapshot.key)
-            if let message = snapshot.value as? NSDictionary{
-                let date = message["date"] as! NSTimeInterval
-                let receiveSenderID = message["senderId"] as! String
-                let receiveDisplayName = message["senderDisplayName"] as! String
-                self.createAvatar(receiveSenderID, senderDisplayName: receiveDisplayName, color: UIColor.jsq_messageBubbleGreenColor())
-                let jsqMessage = JSQMessage(senderId: receiveSenderID, senderDisplayName: receiveDisplayName, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
-                self.messages.append(jsqMessage)
-                if receiveSenderID != self.senderId{
-                    JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
-                }
-            }
-            self.finishReceivingMessageAnimated(true)
         }
     }
     

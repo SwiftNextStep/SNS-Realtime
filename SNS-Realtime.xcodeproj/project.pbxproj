@@ -15,6 +15,7 @@
 		208A2B7F1BBF62BA009660CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 208A2B7D1BBF62BA009660CA /* LaunchScreen.storyboard */; };
 		20E822561C6C7FAC006312E8 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E822551C6C7FAC006312E8 /* MessageViewController.swift */; };
 		20E8225A1C6C80E4006312E8 /* JSQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E822591C6C80E4006312E8 /* JSQViewController.swift */; };
+		20FF2A451CCDE99A006CBE6E /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FF2A441CCDE99A006CBE6E /* ImageHelper.swift */; };
 		764CAB8F356DE51C2CE5A4C6 /* libPods-SNS-Realtime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDB581F1D62A96531C5CEB65 /* libPods-SNS-Realtime.a */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		208A2B801BBF62BA009660CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20E822551C6C7FAC006312E8 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		20E822591C6C80E4006312E8 /* JSQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQViewController.swift; sourceTree = "<group>"; };
+		20FF2A441CCDE99A006CBE6E /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		35DF22285A861AE0AE65B1B6 /* Pods-SNS-Realtime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SNS-Realtime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SNS-Realtime/Pods-SNS-Realtime.debug.xcconfig"; sourceTree = "<group>"; };
 		ADAC844920CB2DADD9D38409 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B1C27FA5D934B208D7DD121A /* Pods-SNS-Realtime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SNS-Realtime.release.xcconfig"; path = "Pods/Target Support Files/Pods-SNS-Realtime/Pods-SNS-Realtime.release.xcconfig"; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				208A2B741BBF62BA009660CA /* AppDelegate.swift */,
 				208A2B781BBF62BA009660CA /* Main.storyboard */,
 				20E822591C6C80E4006312E8 /* JSQViewController.swift */,
+				20FF2A441CCDE99A006CBE6E /* ImageHelper.swift */,
 				208409791BEF645000C6125E /* MessagesTableViewController.swift */,
 				204D93241BCA6A83003A3FD6 /* LoginViewController.swift */,
 				208A2B7B1BBF62BA009660CA /* Assets.xcassets */,
@@ -233,6 +236,7 @@
 				20E822561C6C7FAC006312E8 /* MessageViewController.swift in Sources */,
 				208A2B751BBF62BA009660CA /* AppDelegate.swift in Sources */,
 				20E8225A1C6C80E4006312E8 /* JSQViewController.swift in Sources */,
+				20FF2A451CCDE99A006CBE6E /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

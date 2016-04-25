@@ -18,6 +18,8 @@ class JSQViewController: JSQMessagesViewController {
     var messages = [JSQMessage]()
     var keys = [String]()
     
+    var imageToSend: UIImage?
+    
     let firebase = Firebase(url: "https://sns-realtimeapp.firebaseio.com")
     var userConnection = Firebase()
     
@@ -40,8 +42,9 @@ class JSQViewController: JSQMessagesViewController {
     func setup(){
         userConnection = Firebase(url: "https://sns-realtimeapp.firebaseio.com/users/\(senderId)/isOnline")
         userConnection.onDisconnectSetValue("false")
-        self.inputToolbar?.contentView?.leftBarButtonItem?.hidden = true
-        self.inputToolbar?.contentView?.leftBarButtonItemWidth = 0
+        //Old code we now are going to use the Accesory Button
+        //self.inputToolbar?.contentView?.leftBarButtonItem?.hidden = true
+        //self.inputToolbar?.contentView?.leftBarButtonItemWidth = 0
         
         let bubbleFactory = JSQMessagesBubbleImageFactory()
         incomingBubble = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
@@ -50,7 +53,6 @@ class JSQViewController: JSQMessagesViewController {
         createAvatar(senderId, senderDisplayName: senderDisplayName, color: UIColor.lightGrayColor())
         
         firebase.childByAppendingPath("JSQNode").queryLimitedToLast(50).queryOrderedByChild("date").observeSingleEventOfType(FEventType.Value) { (snapshot:FDataSnapshot!) -> Void in
-            print(snapshot)
             if let values = snapshot.value as? NSDictionary{
                 for value in values{
                     if !self.keys.contains(snapshot.key){
@@ -63,7 +65,6 @@ class JSQViewController: JSQMessagesViewController {
                             self.createAvatar(receiveSenderID, senderDisplayName: receiveDisplayName, color: UIColor.jsq_messageBubbleGreenColor())
                             let jsqMessage = JSQMessage(senderId: receiveSenderID, senderDisplayName: receiveDisplayName, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
                             self.messages.append(jsqMessage)
-                            print(message["message"] as! String)
                         }
                     }
                 }
@@ -165,4 +166,69 @@ class JSQViewController: JSQMessagesViewController {
         
         return messages.count
     }
+    
+    //MARK: -Send Image
+    
+    override func didPressAccessoryButton(sender: UIButton!) {
+        let alertController = UIAlertController(title: "Select Image", message: nil, preferredStyle: .ActionSheet)
+        let cameraAction = UIAlertAction(title: "Camera", style: .Default) { (alertAction: UIAlertAction) in
+            self.getImageFrom(.Camera)
+        }
+        let galleryAction = UIAlertAction(title: "Gallery", style: .Default) { (alertAction: UIAlertAction) in
+            self.getImageFrom(.PhotoLibrary)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alertAction: UIAlertAction) in
+            print("Selected Cancel")
+        }
+        
+        alertController.addAction(cameraAction)
+        alertController.addAction(galleryAction)
+        alertController.addAction(cancelAction)
+
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func getImageFrom(source: UIImagePickerControllerSourceType){
+        if UIImagePickerController.isSourceTypeAvailable(source){
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.modalPresentationStyle = .CurrentContext
+            imagePicker.sourceType  = source
+            imagePicker.allowsEditing = false
+            if (source == .Camera){
+                imagePicker.cameraDevice = .Rear
+            }
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        } else{
+            print("The selected source is not avaliable in this device")
+        }
+    }
 }
+
+extension JSQViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissPicker(picker)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        if (picker.sourceType == .Camera || picker.sourceType == .PhotoLibrary){
+           imageToSend = ImageHelper.resizeImage(image)
+        }
+        dismissPicker(picker)
+    }
+    
+    
+    func dismissPicker(picker: UIImagePickerController){
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.delegate = nil
+    }
+    
+    
+}
+
+
+
+
+
+
